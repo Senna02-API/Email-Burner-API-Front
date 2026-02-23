@@ -1,53 +1,110 @@
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://unpkg.com/lucide@latest"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Burner API | Stop Spam Signups</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #0f172a; color: #f8fafc; }
+        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
+    </style>
+</head>
+<body class="antialiased font-sans">
 
-<section class="max-w-4xl mx-auto my-12 p-8 bg-slate-900 rounded-xl border border-slate-800 text-slate-200 shadow-2xl font-sans">
-    
-    <div class="text-center mb-10">
-        <h2 class="text-3xl font-bold text-white mb-2">How it Works</h2>
-        <p class="text-slate-400 italic">Multi-stage verification logic in < 200ms</p>
+    <div class="max-w-4xl mx-auto px-6 py-20 text-center">
+        <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-500 mb-6">
+            Email Burner API
+        </h1>
+        <p class="text-xl text-slate-400 mb-10 max-w-2xl mx-auto">
+            A high-performance REST API to detect disposable and temporary email addresses. Protect your database from spam instantly.
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div class="glass p-8 rounded-2xl shadow-2xl">
+                <h2 class="text-2xl font-bold mb-2">Flat Rate Access</h2>
+                <p class="text-slate-400 mb-6">Unlimited requests. One low price.</p>
+                <div class="text-4xl font-bold mb-6">€5<span class="text-lg text-slate-500">/mo</span></div>
+                <a href="https://buy.stripe.com/bJeeV52QU5nieZwc395AQ00" 
+                   class="block w-full py-4 px-6 rounded-xl bg-blue-600 hover:bg-blue-500 transition-all font-bold text-white shadow-lg shadow-blue-500/20 text-center">
+                    Get API Access Now
+                </a>
+            </div>
+
+            <div class="glass p-8 rounded-2xl shadow-2xl text-left">
+                <h2 class="text-2xl font-bold mb-2">Live Demo</h2>
+                <p class="text-slate-400 mb-6">Test an email address instantly.</p>
+                <div class="space-y-4">
+                    <input type="email" id="demoEmail" placeholder="example@tempmail.com" 
+                           class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors">
+                    <button onclick="runDemo()" id="demoBtn"
+                            class="w-full py-3 px-6 rounded-xl bg-emerald-600 hover:bg-emerald-500 transition-all font-bold text-white">
+                        Verify Email
+                    </button>
+                    <div id="demoResult" class="hidden p-4 rounded-lg border text-sm font-mono"></div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="grid gap-6">
-        <div class="flex gap-4 p-5 bg-slate-800/50 rounded-lg border border-slate-700">
-            <div class="text-blue-400"><i data-lucide="shield"></i></div>
-            <div>
-                <h3 class="text-lg font-semibold text-white">Stage 1: Source Identification</h3>
-                <p class="text-sm text-slate-400">We analyze the User-Agent to distinguish between Humans and Bots. This allows us to apply smart rate-limiting to protect our infrastructure from abuse.</p>
+    <div class="max-w-3xl mx-auto px-6 pb-20">
+        <div class="glass p-6 rounded-xl overflow-hidden">
+            <h3 class="text-indigo-400 font-semibold mb-4 flex items-center">
+                <span class="mr-2">🚀</span> Developer Documentation
+            </h3>
+            <p class="text-slate-400 mb-4">Send a GET request with your Customer ID:</p>
+            
+            <div class="bg-black/50 p-4 rounded-lg border border-slate-700 font-mono text-sm overflow-x-auto">
+                <span class="text-pink-400">GET</span> 
+                <span class="text-emerald-400">https://email-burner-api-production.up.railway.app/v1/check</span><br>
+                <span class="text-slate-500">?email=</span><span class="text-orange-300">user@tempmail.com</span><br>
+                <span class="text-slate-500">&customer_id=</span><span class="text-orange-300">YOUR_ID</span>
             </div>
-        </div>
 
-        <div class="flex gap-4 p-5 bg-slate-800/50 rounded-lg border border-slate-700">
-            <div class="text-purple-400"><i data-lucide="database"></i></div>
-            <div>
-                <h3 class="text-lg font-semibold text-white">Stage 2: Global Blocklist Scan</h3>
-                <p class="text-sm text-slate-400">The domain is cross-referenced against a local cache of 100,000+ known disposable providers. Because this check happens in-memory, it takes almost 0ms.</p>
-            </div>
-        </div>
-
-        <div class="flex gap-4 p-5 bg-slate-800/50 rounded-lg border border-slate-700 border-l-4 border-l-orange-500">
-            <div class="text-orange-400"><i data-lucide="search"></i></div>
-            <div>
-                <h3 class="text-lg font-semibold text-white">Stage 3: Deep DNS Probing <span class="text-xs bg-orange-500/20 text-orange-400 px-2 py-1 rounded ml-2">Advanced</span></h3>
-                <p class="text-sm text-slate-400">If the domain is unknown, we perform a real-time MX (Mail Exchange) record lookup. If a domain has no mail server configured, it’s flagged as a burner instantly.</p>
-            </div>
-        </div>
-
-        <div class="flex gap-4 p-5 bg-slate-800/50 rounded-lg border border-slate-700">
-            <div class="text-green-400"><i data-lucide="lock"></i></div>
-            <div>
-                <h3 class="text-lg font-semibold text-white">Stage 4: Stateless Delivery</h3>
-                <p class="text-sm text-slate-400">We return the final verdict in a clean JSON format. We never store the email address in a database, ensuring 100% privacy for your users.</p>
+            <div class="mt-6 flex items-center justify-between text-sm text-slate-500 border-t border-slate-700 pt-6">
+                <span>Support: bravery.cs@gmail.com</span>
+                <span class="bg-slate-800 px-2 py-1 rounded">v1.0.0</span>
             </div>
         </div>
     </div>
 
-    <div class="mt-8 p-4 bg-black rounded border border-slate-700 font-mono text-xs text-blue-400">
-        <span class="text-slate-500">// Example Internal Verdict</span><br>
-        { "is_burner": <span class="text-orange-400">true</span>, "reason": <span class="text-green-400">"no_mx_record"</span>, "source": "BOT" }
-    </div>
-</section>
+    <script>
+        async function runDemo() {
+            const email = document.getElementById('demoEmail').value;
+            const btn = document.getElementById('demoBtn');
+            const resultDiv = document.getElementById('demoResult');
+            
+            if(!email || !email.includes('@')) {
+                alert('Please enter a valid email address.');
+                return;
+            }
 
-<script>
-  lucide.createIcons();
-</script>
+            btn.innerText = 'Verifying...';
+            btn.disabled = true;
+            resultDiv.classList.add('hidden');
+
+            try {
+                const response = await fetch(`https://email-burner-api-production.up.railway.app/v1/check?email=${email}&customer_id=demo`);
+                const data = await response.json();
+                
+                resultDiv.classList.remove('hidden');
+                
+                if (data.is_burner) {
+                    resultDiv.className = "mt-4 p-4 rounded-lg border border-red-500/50 bg-red-500/10 text-red-400 text-sm font-mono";
+                    resultDiv.innerHTML = `🚨 Burner detected!<br>Domain: ${email.split('@')[1]}<br>Source: ${data.source}`;
+                } else {
+                    resultDiv.className = "mt-4 p-4 rounded-lg border border-emerald-500/50 bg-emerald-500/10 text-emerald-400 text-sm font-mono";
+                    resultDiv.innerHTML = `✅ Clean email!<br>Status: Allow<br>Source: ${data.source}`;
+                }
+            } catch (err) {
+                resultDiv.classList.remove('hidden');
+                resultDiv.className = "mt-4 p-4 rounded-lg border border-slate-700 bg-slate-800 text-slate-400 text-sm font-mono";
+                resultDiv.innerText = "Error: Limit reached or API offline.";
+            } finally {
+                btn.innerText = 'Verify Email';
+                btn.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>
