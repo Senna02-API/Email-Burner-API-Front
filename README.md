@@ -14,7 +14,7 @@ The service performs a two-step check:
 No complex headers or SDKs, just a GET request.
 
 Endpoint:
-GET https://your-railway-url.com/v1/check?email=test@example.com&customer_id=demo
+GET "https://your-railway-url.com/v1/check?email=test@example.com&customer_id=demo"
 
 ### Example Response:
 {
@@ -37,3 +37,4 @@ I'm building this to learn. If you have a suggestion, or found a bug, please rea
 
 Email: bravery.cs@gmail.com
 Reddit: u/Pale_Arm_7625
+
